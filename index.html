@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- دار دمياط — page sections: hero/search, partners, listings, source browse, submission, statistics, overlays. -->
 <html lang="ar" dir="rtl">
 
 <head>
@@ -13,7 +14,7 @@
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
 
   <!-- Styles -->
@@ -77,15 +78,19 @@
 
     <!-- Partners Section -->
     <section class="partners section" id="partners">
+      <div class="city-scene" id="cityScene" aria-hidden="true"></div>
       <div class="container">
+        <p class="eyebrow">نخبة المطورين</p>
         <h2 class="section-title">شركاؤنا</h2>
         <div class="partners-grid" id="partnersGrid"></div>
+        <div class="partners-marquee" aria-hidden="true"><div class="marquee-track" id="partnersMarquee"></div></div>
       </div>
     </section>
 
     <!-- Listings Section -->
     <section class="listings section" id="listings">
       <div class="container">
+        <p class="eyebrow">مختارة بعناية</p>
         <h2 class="section-title">العقارات</h2>
         <div class="filters-info">
           <div class="results-count" id="resultsCount">عرض 0 نتيجة</div>
@@ -100,6 +105,7 @@
     <!-- Browse by Source -->
     <section class="browse-by-source section">
       <div class="container">
+        <p class="eyebrow">الطريق الأقرب لبيتك</p>
         <h2 class="section-title">تصفح حسب المصدر</h2>
         <div class="source-panels">
           <div class="source-panel" data-source="مالك" id="panelOwner">
@@ -124,6 +130,7 @@
     <!-- Add Property Section -->
     <section class="add-property section">
       <div class="container">
+        <p class="eyebrow">مكانك بين الفرص</p>
         <h2 class="section-title">أضف إعلانك</h2>
         <form class="multi-step-form" id="addPropertyForm">
           <div class="progress-bar">
@@ -268,6 +275,7 @@
     <!-- Stats Section -->
     <section class="stats section">
       <div class="container">
+        <p class="eyebrow">دار دمياط بالأرقام</p>
         <h2 class="section-title">إحصائيات</h2>
         <div class="stats-grid">
           <div class="stat-item">
@@ -297,6 +305,7 @@
         <div class="footer-logo" id="footerLogo"></div>
         <h2 class="footer-title">دار دمياط</h2>
       </div>
+      <p class="footer-wordmark" aria-label="دار دمياط">دار دمياط</p>
       <div class="footer-contact">
         <p>للتواصل</p>
         <a href="#" class="footer-link" id="footerWhatsApp">واتساب</a>
@@ -576,7 +585,8 @@
     <div class="panel-body" id="favoritesList"></div>
   </div>
 
-  <script src="./js/app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="./js/app.js" defer></script>
 </body>
 
 </html>
