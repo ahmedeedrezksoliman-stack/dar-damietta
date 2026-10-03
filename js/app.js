@@ -435,8 +435,11 @@ function setupHeader() {
   });
   const brandLogo = document.getElementById("brandLogo");
   const footerLogo = document.getElementById("footerLogo");
-  if (brandLogo) {
-    brandLogo.style.backgroundImage = "url('./assets/brand/logo.jpg')";
+  if (brandLogo && !brandLogo.querySelector("img")) {
+    const img = document.createElement("img");
+    img.src = "./assets/brand/logo.jpg";
+    img.alt = BRAND_NAME;
+    brandLogo.appendChild(img);
   }
   if (footerLogo) {
     footerLogo.style.backgroundImage = "url('./assets/brand/logo.jpg')";
@@ -498,11 +501,11 @@ function openCompanyOverlay(id) {
   if (!overlay || !comp) return;
   title.textContent = comp.arabicName || comp.name;
   let html = `<div style="display:flex;flex-direction:column;gap:2rem;">
-    <div style="display:flex;align-items:center;gap:1rem;">
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
       <img src="${comp.logo}" alt="${comp.name}" style="width:80px;height:80px;object-fit:contain;filter:grayscale(1);border:1px solid var(--color-gray-200);padding:0.75rem;background:#fff;" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80&auto=format&fit=crop'" />
-      <div>
-        <h3 style="font-size:1.25rem;margin-bottom:0.5rem;">${comp.name}</h3>
-        <p style="opacity:0.8;line-height:1.7;">${comp.description}</p>
+      <div style="flex:1;min-width:0;">
+        <h3 style="font-size:1.25rem;margin-bottom:0.5rem;overflow-wrap:break-word;word-break:break-word;">${comp.name}</h3>
+        <p style="opacity:0.8;line-height:1.7;overflow-wrap:break-word;word-break:break-word;">${comp.description}</p>
       </div>
     </div>`;
   if (comp.projects && comp.projects.length) {
@@ -546,13 +549,11 @@ async function loadData() {
   // Enhance listings with images from properties
   listings = listings.map((item) => {
     if (!item.images || item.images.length === 0) {
-      const propsDir =
-        item.companyId && companies[item.companyId]
-          ? `./assets/properties/${item.companyId}/`
-          : item.source === "مطور" && item.companyId
-          ? `./assets/properties/${item.companyId}/`
-          : `./assets/properties/other/`;
-      item.images = [`${propsDir}1.jpg`, `${propsDir}main.jpg`];
+      if (item.companyId && companies[item.companyId]) {
+        item.images = [`./assets/properties/${item.companyId}.jpg`];
+      } else {
+        item.images = [];
+      }
     }
     return item;
   });
@@ -567,10 +568,10 @@ function renderSourceChips() {
   chips.innerHTML = sources
     .map(
       (s) => `
-    <button class="chip ${currentFilters.source === s ? "active" : ""}" data-source="${s}">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"></path></svg>
-      ${s}
-    </button>
+      <button class="chip ${currentFilters.source === s ? "active" : ""}" data-source="${s}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"></path></svg>
+        ${s}
+      </button>
   `
     )
     .join("");
@@ -625,8 +626,10 @@ function renderListings() {
           <button class="favorite-btn ${isFav ? "active" : ""}" data-id="${item.id}" aria-label="إضافة للمفضلة">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
           </button>
-          <span class="listing-badge">${item.source}</span>
-          ${verifiedBadge}
+          <div class="listing-badges">
+            <span class="listing-badge">${item.source}</span>
+            ${verifiedBadge}
+          </div>
         </div>
         <div class="listing-content">
           <div class="listing-price">${priceText}</div>
@@ -827,7 +830,9 @@ function setupSmoothScroll() {
 }
 
 function setupMagneticAndCursor() {
-  // Desktop only - skip
+  // Custom cursor and magnetic effects are desktop-only; skip on touch devices.
+  if (window.matchMedia("(hover: none), (pointer: coarse)").matches) return;
+  // No cursor/magnetic enhancements on this build.
 }
 
 // Run on load
