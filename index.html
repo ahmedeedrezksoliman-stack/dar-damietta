@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="description" content="سوق عقاري فخم لدمياط الجديدة فقط - ملاك، مطورين، وسطاء في مكان واحد" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>دار دمياط</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="./assets/brand/logo.jpg" type="image/jpeg" />
+</head>
+
+<body>
+  <!-- SVG Grain Noise -->
+  <div class="noise"></div>
+
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo" id="loaderLogo">
+        <!-- Logo or Brand Name -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#home" class="brand" id="brandLink" aria-label="دار دمياط">
+        <div class="brand-logo" id="brandLogo"></div>
+        <span class="brand-text" id="brandText">دار دمياط</span>
+      </a>
+      <div class="header-actions">
+        <button class="icon-btn theme-toggle" id="themeToggle" aria-label="تبديل الوضع" title="تبديل الوضع">
+          <!-- Sun/Moon icon will be injected -->
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <picture>
+        <img src="./assets/brand/hero.png" alt="دار دمياط - Just in Damietta" fetchpriority="high" style="width: 100%; height: auto; display: block;" />
+      </picture>
+      <div class="container" style="margin-top: 1.5rem;">
+        <!-- Search Bar -->
+        <div class="search-bar" id="searchBar">
+          <input type="text" class="search-input" id="searchInput" placeholder="ابحث بالكلمة المفتاحية..." />
+          <button class="btn btn-primary search-btn" id="filtersBtn">
+            فلاتر
+          </button>
+        </div>
+        <!-- Source Chips -->
+        <div class="chips-wrapper">
+          <div class="chips" id="sourceChips"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners section" id="partners">
+      <div class="container">
+        <h2 class="section-title">شركاؤنا</h2>
+        <div class="partners-grid" id="partnersGrid"></div>
+      </div>
+    </section>
+
+    <!-- Listings Section -->
+    <section class="listings section" id="listings">
+      <div class="container">
+        <h2 class="section-title">العقارات</h2>
+        <div class="filters-info">
+          <div class="results-count" id="resultsCount">عرض 0 نتيجة</div>
+        </div>
+        <div class="listings-grid" id="listingsGrid"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <p>لا توجد نتائج</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Browse by Source -->
+    <section class="browse-by-source section">
+      <div class="container">
+        <h2 class="section-title">تصفح حسب المصدر</h2>
+        <div class="source-panels">
+          <div class="source-panel" data-source="مالك" id="panelOwner">
+            <h3 class="panel-title">ملّاك</h3>
+            <p class="panel-subtitle">عقارات مباشرة من الملاك</p>
+            <button class="panel-btn" data-target="listings">تصفح العقارات</button>
+          </div>
+          <div class="source-panel" data-source="مطور" id="panelDeveloper">
+            <h3 class="panel-title">مطوّرون</h3>
+            <p class="panel-subtitle">مشروعات ووحدات المطوّرين</p>
+            <button class="panel-btn" data-target="listings">تصفح العقارات</button>
+          </div>
+          <div class="source-panel" data-source="وسيط" id="panelBroker">
+            <h3 class="panel-title">وسطاء</h3>
+            <p class="panel-subtitle">عقارات من السماسرة والوسطاء</p>
+            <button class="panel-btn" data-target="listings">تصفح العقارات</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add Property Section -->
+    <section class="add-property section">
+      <div class="container">
+        <h2 class="section-title">أضف إعلانك</h2>
+        <form class="multi-step-form" id="addPropertyForm">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="steps">
+            <!-- Step 1 -->
+            <div class="step active" data-step="1">
+              <h3 class="step-title">نوع الحساب</h3>
+              <div class="radio-group">
+                <label class="radio-card">
+                  <input type="radio" name="accountType" value="مالك" required />
+                  <span>مالك</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="accountType" value="مطور" required />
+                  <span>مطور</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="accountType" value="وسيط" required />
+                  <span>وسيط</span>
+                </label>
+              </div>
+              <div class="step-actions">
+                <button type="button" class="btn btn-next">التالي</button>
+              </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="step" data-step="2">
+              <h3 class="step-title">نوع العقار</h3>
+              <div class="radio-group">
+                <label class="radio-card">
+                  <input type="radio" name="propertyType" value="شقة" required />
+                  <span>شقة</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="propertyType" value="تجاري" required />
+                  <span>تجاري</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="propertyType" value="محل" required />
+                  <span>محل</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="propertyType" value="أرض" required />
+                  <span>أرض</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="propertyType" value="فيلا" required />
+                  <span>فيلا</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="propertyType" value="إداري" required />
+                  <span>إداري</span>
+                </label>
+              </div>
+              <div class="radio-group" style="margin-top: 1rem">
+                <label class="radio-card">
+                  <input type="radio" name="dealType" value="بيع" required />
+                  <span>بيع</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="dealType" value="إيجار" required />
+                  <span>إيجار</span>
+                </label>
+              </div>
+              <div class="step-actions">
+                <button type="button" class="btn btn-prev">السابق</button>
+                <button type="button" class="btn btn-next">التالي</button>
+              </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="step" data-step="3">
+              <h3 class="step-title">التفاصيل</h3>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>العنوان</label>
+                  <input type="text" name="title" required />
+                </div>
+                <div class="form-group">
+                  <label>الحي / المرحلة</label>
+                  <input type="text" name="district" placeholder="مثال: الحي الرابع" required />
+                </div>
+                <div class="form-group">
+                  <label>المساحة (م²)</label>
+                  <input type="number" name="area" min="0" step="0.01" required />
+                </div>
+                <div class="form-group">
+                  <label>عدد الغرف</label>
+                  <input type="number" name="rooms" min="0" step="1" />
+                </div>
+                <div class="form-group">
+                  <label>التشطيب</label>
+                  <input type="text" name="finishing" placeholder="مثال: غير تشطيب / تشطيب كامل" />
+                </div>
+                <div class="form-group">
+                  <label>طريقة الدفع</label>
+                  <input type="text" name="payment" placeholder="كاش / تقسيط" />
+                </div>
+              </div>
+              <div class="step-actions">
+                <button type="button" class="btn btn-prev">السابق</button>
+                <button type="button" class="btn btn-next">التالي</button>
+              </div>
+            </div>
+            <!-- Step 4 -->
+            <div class="step" data-step="4">
+              <h3 class="step-title">السعر ورفع الصور</h3>
+              <div class="form-group">
+                <label>السعر (ج.م)</label>
+                <input type="number" name="price" min="0" step="0.01" required />
+              </div>
+              <div class="form-group">
+                <label>رفع الصور (سحب وإفلات)</label>
+                <div class="dropzone" id="dropzone">
+                  <p>اسحب الصور هنا أو انقر للاختيار</p>
+                  <input type="file" id="imageInput" multiple accept="image/jpeg,image/jpg" hidden />
+                </div>
+                <div class="preview-grid" id="previewGrid"></div>
+              </div>
+              <div class="form-group">
+                <label>رقم الهاتف</label>
+                <input type="tel" name="phone" placeholder="20XXXXXXXXXX" />
+              </div>
+              <div class="form-group">
+                <label>رقم واتساب</label>
+                <input type="tel" name="whatsapp" placeholder="20XXXXXXXXXX" required />
+              </div>
+              <div class="step-actions">
+                <button type="button" class="btn btn-prev">السابق</button>
+                <button type="submit" class="btn btn-submit">إرسال الإعلان</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="form-success" id="formSuccess" hidden>
+          <p>إعلانك قيد المراجعة من الإدارة</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats section">
+      <div class="container">
+        <h2 class="section-title">إحصائيات</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number" data-count="1200">0</div>
+            <div class="stat-label">إعلانات</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-count="4">0</div>
+            <div class="stat-label">شركات</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-count="85">0</div>
+            <div class="stat-label">وسطاء</div>
+          </div>
+        </div>
+        <p class="stats-note">
+          <strong>إعلان موثّق:</strong> إعلان تم التحقق منه من المصدر مباشرة لضمان المصداقية.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">
+        <div class="footer-logo" id="footerLogo"></div>
+        <h2 class="footer-title">دار دمياط</h2>
+      </div>
+      <div class="footer-contact">
+        <p>للتواصل</p>
+        <a href="#" class="footer-link" id="footerWhatsApp">واتساب</a>
+      </div>
+      <div class="footer-social">
+        <a href="#" class="social-link" aria-label="Facebook">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+          </svg>
+        </a>
+        <a href="#" class="social-link" aria-label="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+      </div>
+      <div class="footer-copy">
+        <p>&copy; <span id="year"></span> دار دمياط. جميع الحقوق محفوظة.</p>
+        <p class="disclaimer">
+          ممنوع أي عبارة تدل على اعتماد رسمي.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="#home" class="nav-item active" data-nav="home">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      <span>الرئيسية</span>
+    </a>
+    <a href="#listings" class="nav-item" data-nav="listings">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" transform="translate(-6 6)"></rect>
+      </svg>
+      <span>العقارات</span>
+    </a>
+    <a href="#partners" class="nav-item" data-nav="partners">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <span>الشركاء</span>
+    </a>
+    <a href="#" class="nav-item" data-nav="favorites" id="favoritesNav">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      <span>المفضلة</span>
+    </a>
+  </nav>
+
+  <!-- Filters Bottom Sheet -->
+  <div class="bottom-sheet" id="filtersSheet">
+    <div class="sheet-overlay" id="sheetOverlay"></div>
+    <div class="sheet-content">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title">الفلاتر</h3>
+      <div class="sheet-body">
+        <!-- Source Filter -->
+        <div class="filter-group">
+          <label class="filter-label">المصدر</label>
+          <div class="filter-options">
+            <label class="chip-option">
+              <input type="radio" name="filterSource" value="الكل" checked />
+              <span>الكل</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterSource" value="مالك" />
+              <span>المالك مباشرة</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterSource" value="مطور" />
+              <span>المطور</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterSource" value="وسيط" />
+              <span>المسوّق-الوسيط</span>
+            </label>
+          </div>
+        </div>
+        <!-- Deal Type -->
+        <div class="filter-group">
+          <label class="filter-label">بيع/إيجار</label>
+          <div class="filter-options">
+            <label class="chip-option">
+              <input type="radio" name="filterDeal" value="الكل" checked />
+              <span>الكل</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterDeal" value="بيع" />
+              <span>بيع</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterDeal" value="إيجار" />
+              <span>إيجار</span>
+            </label>
+          </div>
+        </div>
+        <!-- Property Type -->
+        <div class="filter-group">
+          <label class="filter-label">نوع العقار</label>
+          <div class="filter-options">
+            <label class="chip-option">
+              <input type="radio" name="filterType" value="الكل" checked />
+              <span>الكل</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterType" value="شقة" />
+              <span>شقة</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterType" value="تجاري" />
+              <span>تجاري</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterType" value="محل" />
+              <span>محل</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterType" value="أرض" />
+              <span>أرض</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterType" value="فيلا" />
+              <span>فيلا</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterType" value="إداري" />
+              <span>إداري</span>
+            </label>
+          </div>
+        </div>
+        <!-- Price -->
+        <div class="filter-group">
+          <label class="filter-label">السعر (ج.م)</label>
+          <div class="range-group">
+            <input type="number" id="priceMin" placeholder="أدنى" min="0" />
+            <span>-</span>
+            <input type="number" id="priceMax" placeholder="أعلى" min="0" />
+          </div>
+        </div>
+        <!-- Area -->
+        <div class="filter-group">
+          <label class="filter-label">المساحة (م²)</label>
+          <div class="range-group">
+            <input type="number" id="areaMin" placeholder="أدنى" min="0" />
+            <span>-</span>
+            <input type="number" id="areaMax" placeholder="أعلى" min="0" />
+          </div>
+        </div>
+        <!-- Rooms -->
+        <div class="filter-group">
+          <label class="filter-label">عدد الغرف</label>
+          <div class="filter-options">
+            <label class="chip-option">
+              <input type="radio" name="filterRooms" value="الكل" checked />
+              <span>الكل</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterRooms" value="0" />
+              <span>0</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterRooms" value="1" />
+              <span>1</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterRooms" value="2" />
+              <span>2</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterRooms" value="3" />
+              <span>3+</span>
+            </label>
+          </div>
+        </div>
+        <!-- District -->
+        <div class="filter-group">
+          <label class="filter-label">الحي/المرحلة</label>
+          <input type="text" id="filterDistrict" placeholder="ابحث بالحي..." />
+        </div>
+        <!-- Payment -->
+        <div class="filter-group">
+          <label class="filter-label">طريقة الدفع</label>
+          <div class="filter-options">
+            <label class="chip-option">
+              <input type="radio" name="filterPayment" value="الكل" checked />
+              <span>الكل</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterPayment" value="كاش" />
+              <span>كاش</span>
+            </label>
+            <label class="chip-option">
+              <input type="radio" name="filterPayment" value="تقسيط" />
+              <span>تقسيط</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="sheet-actions">
+        <button class="btn btn-clear" id="clearFilters">مسح الكل</button>
+        <button class="btn btn-primary" id="applyFilters">عرض النتائج</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Property Details Modal -->
+  <div class="modal" id="propertyModal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+      <button class="icon-btn modal-close" id="modalClose" aria-label="إغلاق">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-bottom-bar">
+        <a href="#" class="btn btn-ghost" id="callBtn">اتصال</a>
+        <a href="#" class="btn btn-primary" id="whatsappBtn" target="_blank" rel="noopener">واتساب</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Company Details Overlay -->
+  <div class="overlay" id="companyOverlay">
+    <div class="overlay-header">
+      <button class="icon-btn" id="closeCompanyOverlay" aria-label="رجوع">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+      <h2 class="overlay-title" id="companyOverlayTitle"></h2>
+    </div>
+    <div class="overlay-body" id="companyOverlayBody"></div>
+  </div>
+
+  <!-- Favorites Panel -->
+  <div class="favorites-panel" id="favoritesPanel">
+    <div class="panel-header">
+      <h3>المفضلة</h3>
+      <button class="icon-btn" id="closeFavorites">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="panel-body" id="favoritesList"></div>
+  </div>
+
+  <script src="./js/app.js"></script>
+</body>
+
+</html>
